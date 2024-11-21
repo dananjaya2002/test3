@@ -1,0 +1,16 @@
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+
+$DownloadURL = 'https://github.com/dananjaya2002/test3/blob/main/file1.txt'
+
+
+
+$isAdmin = [bool]([Security.Principal.WindowsIdentity]::GetCurrent().Groups -match 'S-1-5-32-544')
+
+
+
+try {
+    $response = Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing
+}
+finally {
+	$ErrorActionPreference = "Stop"
+}
